@@ -1,18 +1,16 @@
 import pandas as pd
-import csv
 
 
-#is54 == False and must be EB
-#awk -F '\t' '{if($14=="False" && $16=="EB_novel")print $3}' *covid_* | sort | uniq > covidEB.txt
-#awk -F '\t' '{if($14=="False" && $16=="EB_novel")print $3}' *non_* | sort | uniq > nonCovidEB.txt
+
 
 
 
 
 md = pd.read_csv("Transcript_level_metadata.tsv",sep='\t')
-covid = pd.read_csv("covidEB.txt",sep='\t',header=None)
+
+covid = pd.read_csv("CovidEBs.txt",sep='\t',header=None)
 covid.columns =['Gene_stable_ID']
-non = pd.read_csv("nonCovidEB.txt",sep='\t',header=None)
+non = pd.read_csv("NonCovidEBs.txt",sep='\t',header=None)
 non.columns =['Gene_stable_ID']
 
 
@@ -26,7 +24,7 @@ md['attributes']= "gene_id \"" + md['Gene_stable_ID'] + "\"; "  +"transcript_id 
 
 
 non=pd.merge(non,md,on=["Gene_stable_ID"])
-non["source"]="NonCovid"
+non["source"]="EB_novel"
 non["feature"]="CDS"
 non["score"]="."
 non["frame"]="."
@@ -35,7 +33,7 @@ non=non[["chr","source","feature","start","end","score","strand","frame","attrib
 
 
 covid=pd.merge(covid,md,on=["Gene_stable_ID"])
-covid["source"]="Covid Related"
+covid["source"]="COVID-19 Related EB_novel"
 covid["feature"]="CDS"
 covid["score"]="."
 covid["frame"]="."
@@ -43,7 +41,7 @@ covid=covid[["chr","source","feature","start","end","score","strand","frame","at
 
 
 _54k=md[md["is54K_EB"]==True]
-_54k["source"]="GTEx-TCGA"
+_54k["source"]="EB_novel"
 _54k["feature"]="CDS"
 _54k["score"]="."
 _54k["frame"]="."
