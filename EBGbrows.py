@@ -15,7 +15,7 @@ non.columns =['Gene_stable_ID']
 
 
 #Get useful attributes for gtf
-md['attributes']= "gene_id \"" + md['Gene_stable_ID'] + "\"; "  +"transcript_id \"" + md['TranscriptID'] + "\"; "  + "ORF_length \"" + md['ORF_length'].astype(str) + "\"; "  + "cdna_length \"" + md['cdna_length'].astype(str) +"\"; "  + "final_strata \"" + md['final_strata'] + "\"; "  + "TranscriptID \"" + md['TranscriptID'] + "\"; "   
+md['attributes']= "gene_id \"" + md['Gene_stable_ID'] + "\"; "  +"transcript_id \"" + md['TranscriptID'] + "\"; "  + "ORF_length \"" + md['ORF_length'].astype(str) + "\"; "  + "cdna_length \"" + md['cdna_length'].astype(str) +"\"; "  + "final_strata \"" + md['final_strata'].fillna('').astype('string') + "\"; "   
 
 
 
@@ -24,7 +24,7 @@ md['attributes']= "gene_id \"" + md['Gene_stable_ID'] + "\"; "  +"transcript_id 
 
 
 non=pd.merge(non,md,on=["Gene_stable_ID"])
-non["source"]="EB_novel"
+non["source"]="EB"
 non["feature"]="CDS"
 non["score"]="."
 non["frame"]="."
@@ -33,20 +33,14 @@ non=non[["chr","source","feature","start","end","score","strand","frame","attrib
 
 
 covid=pd.merge(covid,md,on=["Gene_stable_ID"])
-covid["source"]="COVID-19 Related EB_novel"
+covid["source"]="COVID-19 expressed EB"
 covid["feature"]="CDS"
 covid["score"]="."
 covid["frame"]="."
 covid=covid[["chr","source","feature","start","end","score","strand","frame","attributes"]]
 
 
-_54k=md[md["is54K_EB"]==True]
-_54k["source"]="EB_novel"
-_54k["feature"]="CDS"
-_54k["score"]="."
-_54k["frame"]="."
-_54k=_54k[["chr","source","feature","start","end","score","strand","frame","attributes"]]
 
 
-gtf = pd.concat([_54k,covid,non],ignore_index=True)
+gtf = pd.concat([covid,non],ignore_index=True)
 gtf.to_csv("EBs.gtf",sep='\t',index=False,mode='w',quoting=csv.QUOTE_NONE)
