@@ -39,8 +39,14 @@ covid["score"]="."
 covid["frame"]="."
 covid=covid[["chr","source","feature","start","end","score","strand","frame","attributes"]]
 
+_54k=md[md["is54K_EB"]==True]
+_54k["source"]="EB"
+_54k["feature"]="CDS"
+_54k["score"]="."
+_54k["frame"]="."
+_54k=_54k[["chr","source","feature","start","end","score","strand","frame","attributes"]]
 
 
-
-gtf = pd.concat([covid,non],ignore_index=True)
+gtf = pd.concat([covid,non,_54k],ignore_index=True)
+gtf=gtf.drop_duplicates(subset=['attributes'], keep='first').reset_index()
 gtf.to_csv("EBs.gtf",sep='\t',index=False,mode='w',quoting=csv.QUOTE_NONE)
