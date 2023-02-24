@@ -31,19 +31,39 @@ ebs=ebs.drop_duplicates(subset=['Gene_stable_ID'], keep='first').reset_index()
 
 ebs=pd.merge(ebs,md,on=["Gene_stable_ID"])
 ebs["ID"]="."
-ebs["score"]="."
+ebs["score"]="0"
 
 bedDet=ebs[["chr", "start","end","TranscriptID","score","strand","source","attributes"]]
 
-
+bedDet["start"]=bedDet["start"].astype(int)
+bedDet["end"]=bedDet["end"].astype(int)
 
 chrs=bedDet["chr"].drop_duplicates().to_list()
 
 
 for i in chrs:
     df=bedDet[(bedDet['chr'] == i) ]
-    dfEB=df[(df['source'] == "EB") ]
-    dfCov=df[(df['source'] == 'COVID-19 expressed EB') ]
-    dfCov.to_csv(i+"_CovidEB.tsv",sep='\t',index=False,mode='w',quoting=csv.QUOTE_NONE)
-    dfEB.to_csv(i+"_EB.tsv",sep='\t',index=False,mode='w',quoting=csv.QUOTE_NONE)
-   
+    
+    bedCov=open(i+"_CovidEB.bed", "w")
+    bedCov.write("browser position " + i)
+    bedCov.write('\n')
+    bedCov.write("track name=\""+i+"\" type=bedDetail color=255,0,0 description=\"COVID-19 expressed Evidence based\"")
+    bedCov.write('\n')
+    bedCov.write(df[(df['source'] == 'COVID-19 expressed EB') ].to_csv(index=False, header=False, sep='\t'))
+    bedCov.close()
+    
+    bedEB=open(i+"_EB.bed", "w")
+    bedEB.write("browser position " + i)
+    bedEB.write('\n')
+    bedEB.write("track name=\""+i+"\" type=bedDetail color=255,0,0 description=\"Evidence based\"")
+    bedEB.write('\n')
+    bedEB.write(df[(df['source'] == 'EB') ].to_csv(index=False, header=False, sep='\t'))
+    bedEB.close()
+    
+
+
+
+
+
+
+
