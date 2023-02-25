@@ -10,7 +10,7 @@ see track lines: https://genome.ucsc.edu/goldenPath/help/customTrack.html#TRACK
 
 see track grouping: https://genome.ucsc.edu/goldenPath/help/trackDb/trackDbHub.html#superTrack
 
-## UCSC Genome Browser##
+## UCSC Genome Browser
 After making the track files, make a UCSC accout to enable track sharing. Then upload your bed detail files https://genome.ucsc.edu/cgi-bin/hgCustom.
 
 
