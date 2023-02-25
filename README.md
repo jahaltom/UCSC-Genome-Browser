@@ -5,7 +5,9 @@
 **UCSCGbrowsTrackGenerator.py:** Takes in NonCovidEBs.txt and CovidEBs.txt from UniqueList and generated UCSC bed detaile formated tracks for each chromosome. 
 
 bed detail format: https://genome.ucsc.edu/FAQ/FAQformat.html#format1
+
 see track lines: https://genome.ucsc.edu/goldenPath/help/customTrack.html#TRACK
+
 see track grouping: https://genome.ucsc.edu/goldenPath/help/trackDb/trackDbHub.html#superTrack
 
 ##UCSC Genome Browser##
