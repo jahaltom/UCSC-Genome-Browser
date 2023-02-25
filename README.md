@@ -13,4 +13,4 @@ After making the track files, make a UCSC accout to enable track sharing. Then u
 
 
 
-![alt text](https://github.com/jahaltom/RNA-Seq-Ancestry-Inference/blob/main/FlowChart.png?raw=true)
+![alt text](https://github.com/jahaltom/UCSC-Genome-Browser/blob/main/UCSCGenomeBrowserSession.png?raw=true)
