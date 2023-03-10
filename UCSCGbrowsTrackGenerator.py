@@ -15,7 +15,7 @@ non.columns =['Gene_stable_ID']
 
 
 #Get useful attributes for gtf
-md['attributes']= "Gene ID: " + md['Gene_stable_ID'] + "Transcript ID: " + md['TranscriptID'] + "ORF length: " + md['ORF_length'].astype(str) + "cDNA length: " + md['cdna_length'].astype(str) +"Final Strata: " + md['final_strata'].fillna('').astype('string')   
+md['attributes']= "Gene ID: " + md['Gene_stable_ID'] + "  Transcript ID: " + md['TranscriptID'] + "  ORF length: " + md['ORF_length'].astype(str) + "  cDNA length: " + md['cdna_length'].astype(str) +"  Final Strata: " + md['final_strata'].fillna('').astype('string')   
 
 
 
