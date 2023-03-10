@@ -15,7 +15,7 @@ non.columns =['Gene_stable_ID']
 
 
 #Get useful attributes for gtf
-md['attributes']= "Gene ID: " + md['Gene_stable_ID'] + "  Transcript ID: " + md['TranscriptID'] + "  ORF length: " + md['ORF_length'].astype(str) + "  cDNA length: " + md['cdna_length'].astype(str) +"  Final Strata: " + md['final_strata'].fillna('').astype('string')   
+md['attributes']= "Gene ID: " + md['Gene_stable_ID'] + "    Transcript ID: " + md['TranscriptID'] + "    ORF length: " + md['ORF_length'].astype(str) + "    cDNA length: " + md['cdna_length'].astype(str) +"    Final Strata: " + md['final_strata'].fillna('').astype('string')   
 
 
 
@@ -40,22 +40,18 @@ bedDet["end"]=bedDet["end"].astype(int)
 
 chrs=bedDet["chr"].drop_duplicates().to_list()
 
-
+bed=open("UCSC_EB.bed", "w")
 for i in chrs:
     df=bedDet[(bedDet['chr'] == i) ]
-    
-    bed=open(i+"_EB.bed", "w")
-    bed.write("browser position " + i)
-    bed.write('\n')
-    bed.write("track name=\""+i+"_COVID-19 expressed\" type=bedDetail color=255,0,0 description=\"COVID-19 expressed Evidence based\"")
+    bed.write("track name=\""+i+" COVID-19 expressed evidence based\" type=bedDetail color=255,0,0 description=\"COVID-19 expressed evidence based\"")
     bed.write('\n')
     bed.write(df[(df['source'] == 'COVID-19 expressed EB') ].to_csv(index=False, header=False, sep='\t'))
  
     bed.write('\n')
-    bed.write("track name=\""+i+"_EB\" type=bedDetail color=0,0,255 description=\"Evidence based\"")
+    bed.write("track name=\""+i+" Evidence based\" type=bedDetail color=0,0,255 description=\"Evidence based\"")
     bed.write('\n')
     bed.write(df[(df['source'] == 'EB') ].to_csv(index=False, header=False, sep='\t'))
-    bed.close()
+bed.close()
     
 
 
