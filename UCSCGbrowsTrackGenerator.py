@@ -38,19 +38,17 @@ bedDet=ebs[["chr", "start","end","TranscriptID","score","strand","source","attri
 bedDet["start"]=bedDet["start"].astype(int)
 bedDet["end"]=bedDet["end"].astype(int)
 
-chrs=bedDet["chr"].drop_duplicates().to_list()
+
 
 bed=open("UCSC_EB.bed", "w")
-for i in chrs:
-    df=bedDet[(bedDet['chr'] == i) ]
-    if len(df[(df['source'] == 'COVID-19 expressed EB') ])>0:
-        bed.write("track name=\""+i+" COVID-19 expressed evidence based\" type=bedDetail color=255,0,0 description=\"COVID-19 expressed evidence based\" visibility=0")
-        bed.write('\n')
-        bed.write(df[(df['source'] == 'COVID-19 expressed EB') ].to_csv(index=False, header=False, sep='\t'))
-    if len(df[(df['source'] == 'EB') ])>0:
-        bed.write('\n')
-        bed.write("track name=\""+i+" Evidence based\" type=bedDetail color=0,0,255 description=\"Evidence based\" visibility=0")
-        bed.write('\n')
-        bed.write(df[(df['source'] == 'EB') ].to_csv(index=False, header=False, sep='\t'))
+
+   
+bed.write("track name=\"COVID-19 expressed evidence based\" type=bedDetail color=255,0,0 description=\"COVID-19 expressed evidence based\" visibility=1")
+bed.write('\n')
+bed.write(bedDet[(bedDet['source'] == 'COVID-19 expressed EB') ].to_csv(index=False, header=False, sep='\t'))
+   
+bed.write('\n')
+bed.write("track name=\"Evidence based\" type=bedDetail color=0,0,255 description=\"Evidence based\" visibility=1")
+bed.write('\n')
+bed.write(bedDet[(bedDet['source'] == 'EB') ].to_csv(index=False, header=False, sep='\t'))
 bed.close()
-    
