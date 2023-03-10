@@ -41,9 +41,9 @@ bedDet["end"]=bedDet["end"].astype(int)
 
 
 bed=open("UCSC_EB.bed", "w")
-
-   
-bed.write("track name=\"COVID-19 expressed evidence based\" type=bedDetail color=255,0,0 description=\"COVID-19 expressed evidence based\" visibility=1")
+bed.write('browser position chr1')
+bed.write('\n')   
+bed.write("track name=\"COVID-19 expressed\" type=bedDetail color=255,0,0 description=\"COVID-19 expressed evidence based\" visibility=1")
 bed.write('\n')
 bed.write(bedDet[(bedDet['source'] == 'COVID-19 expressed EB') ].to_csv(index=False, header=False, sep='\t'))
    
