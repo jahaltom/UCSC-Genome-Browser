@@ -47,7 +47,7 @@ for i in chrs:
     bed=open(i+"_EB.bed", "w")
     bed.write("browser position " + i)
     bed.write('\n')
-    bed.write("track name=\""+i+"_COVID-19 expressed\" type=bedDetail color=255,0,0 description=\"COVID-19 expressed Evidence based\"")
+    bed.write("track name=\""+i+"_COVID-19 expressed\" type=bedDetail color=255,0,0 description=\"COVID-19 expressed Evidence based\" url=\"https://htmlpreview.github.io/?https://github.com/jahaltom/UCSC-Genome-Browser/blob/main/EB.html\"")
     bed.write('\n')
     bed.write(df[(df['source'] == 'COVID-19 expressed EB') ].to_csv(index=False, header=False, sep='\t'))
  
