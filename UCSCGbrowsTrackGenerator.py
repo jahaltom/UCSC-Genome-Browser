@@ -35,7 +35,8 @@ ebs["score"]="0"
 
 bedDet=ebs[["chr", "start","end","TranscriptID","score","strand","source","attributes"]]
 
-bedDet["start"]=bedDet["start"].astype(int)
+#Make start 0-based
+bedDet["start"]=bedDet["start"].astype(int)-1
 bedDet["end"]=bedDet["end"].astype(int)
 
 
