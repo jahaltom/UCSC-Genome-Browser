@@ -1,5 +1,5 @@
-cat AutopsycovidEBs.txt NasalcovidEBs.txt SRAcovidEBs.txt  | sort | uniq | grep -v "Gene_stable_ID" > covid
-cat AutopsynonCovidEBs.txt SRAnonCovidEBs.txt NasalnonCovidEBs.txt | sort | uniq | grep -v "Gene_stable_ID" > non
+cat AutopsycovidEBs.txt NasalcovidEBs.txt SRAcovidEBs.txt  | sort | uniq | grep -v "TranscriptID" > covid
+cat AutopsynonCovidEBs.txt SRAnonCovidEBs.txt NasalnonCovidEBs.txt | sort | uniq | grep -v "TranscriptID" > non
 comm -1 covid non | sed -e 's/[ \t]*//' > NonCovidEBs.txt
 comm -23 covid non | sed -e 's/[ \t]*//' > CovidEBs.txt
 
