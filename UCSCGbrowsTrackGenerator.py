@@ -9,9 +9,9 @@ import csv
 md = pd.read_csv("Transcript_level_metadata.tsv",sep='\t')
 
 covid = pd.read_csv("CovidEBs.txt",sep='\t',header=None)
-covid.columns =['Gene_stable_ID']
+covid.columns =['TranscriptID']
 non = pd.read_csv("NonCovidEBs.txt",sep='\t',header=None)
-non.columns =['Gene_stable_ID']
+non.columns =['TranscriptID']
 
 
 #Get useful attributes for gtf
@@ -24,12 +24,12 @@ covid["source"]="COVID-19 expressed EB"
 
 _54k=md[md["is54K_EB"]==True]
 _54k["source"]="EB"
-_54k=_54k[["Gene_stable_ID","source"]]
+_54k=_54k[["TranscriptID","source"]]
 
 ebs = pd.concat([covid,non,_54k],ignore_index=True)
-ebs=ebs.drop_duplicates(subset=['Gene_stable_ID'], keep='first').reset_index()
+ebs=ebs.drop_duplicates(subset=['TranscriptID'], keep='first').reset_index()
 
-ebs=pd.merge(ebs,md,on=["Gene_stable_ID"])
+ebs=pd.merge(ebs,md,on=["TranscriptID"])
 ebs["ID"]="."
 ebs["score"]="0"
 
