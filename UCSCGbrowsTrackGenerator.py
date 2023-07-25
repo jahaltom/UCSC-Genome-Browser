@@ -71,7 +71,7 @@ md_tx.to_csv("Transcript_level_metadata.tsv",sep='\t',index=False)
 df=md_tx[["EB_type","Gene_ID_ver"]].dropna()
 df=df.drop_duplicates()
 md_gene=pd.merge(md_gene,df,on=["Gene_ID_ver"],how="left")
-md_tx.to_csv("Gene_level_metadata.tsv",sep='\t',index=False)
+md_gene.to_csv("Gene_level_metadata.tsv",sep='\t',index=False)
 
 
 
