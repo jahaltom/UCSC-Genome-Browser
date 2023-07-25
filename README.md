@@ -15,6 +15,6 @@ After making the track file, make a UCSC accout to enable track sharing. Then up
 Use EB.html for "Optional track documentation:"
 
 
-Gbrows link: https://genome.ucsc.edu/s/jahaltom/Evidence%20based%20Transcripts
+Gbrows link: https://genome.ucsc.edu/s/jahaltom/EB%20Genes
 
 ![alt text](https://github.com/jahaltom/UCSC-Genome-Browser/blob/main/UCSCGenomeBrowserSession.png?raw=true)
