@@ -53,3 +53,35 @@ bed.write("track name=\"Evidence based\" type=bedDetail color=0,0,255 descriptio
 bed.write('\n')
 bed.write(bedDet[(bedDet['source'] == 'EB') ].to_csv(index=False, header=False, sep='\t'))
 bed.close()
+
+#Update metadata
+md_tx = pd.read_csv("Transcript_level_metadata.tsv",sep='\t')
+md_tx=md_tx.drop(columns=['EB_type'])
+md_gene = pd.read_csv("Gene_level_metadata.tsv",sep='\t')
+md_gene=md_tx.drop(columns=['EB_type'])
+
+
+df=bedDet[["TranscriptID","source"]]
+df = df.rename(columns={'source': 'EB_type'})
+
+md_tx=pd.merge(md_tx,df,on=["TranscriptID"],how="left")
+
+md_tx.to_csv("Transcript_level_metadata.tsv",sep='\t',index=False)
+
+df=md_tx[["EB_type","Gene_ID_ver"]].dropna()
+
+md_gene=pd.merge(md_gene,df,on=["Gene_ID_ver"],how="left")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
