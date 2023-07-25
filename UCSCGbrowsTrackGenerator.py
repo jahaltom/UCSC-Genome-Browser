@@ -15,7 +15,7 @@ non.columns =['TranscriptID']
 
 
 #Get useful attributes for gtf
-md['attributes']= "Gene ID: " + md['Gene_stable_ID'] + "    Transcript ID: " + md['TranscriptID'] + "    ORF length: " + md['ORF_length'].astype(str) + "    cDNA length: " + md['cdna_length'].astype(str) +"    Final Strata: " + md['final_strata'].fillna('').astype('string')   
+md['attributes']= "Gene ID Version: " + md['Gene_ID_ver'] + "    Transcript ID: " + md['TranscriptID'] + "    ORF length: " + md['ORF_length'].astype(str) + "    cDNA length: " + md['cdna_length'].astype(str) +"    Final Strata: " + md['final_strata'].fillna('').astype('string')   
 
 
 
@@ -69,8 +69,9 @@ md_tx=pd.merge(md_tx,df,on=["TranscriptID"],how="left")
 md_tx.to_csv("Transcript_level_metadata.tsv",sep='\t',index=False)
 
 df=md_tx[["EB_type","Gene_ID_ver"]].dropna()
-
+df=df.drop_duplicates()
 md_gene=pd.merge(md_gene,df,on=["Gene_ID_ver"],how="left")
+md_tx.to_csv("Gene_level_metadata.tsv",sep='\t',index=False)
 
 
 
