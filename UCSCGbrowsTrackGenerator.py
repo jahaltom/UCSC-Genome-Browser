@@ -58,7 +58,7 @@ bed.close()
 md_tx = pd.read_csv("Transcript_level_metadata.tsv",sep='\t')
 md_tx=md_tx.drop(columns=['EB_type'])
 md_gene = pd.read_csv("Gene_level_metadata.tsv",sep='\t')
-md_gene=md_tx.drop(columns=['EB_type'])
+md_gene=md_gene.drop(columns=['EB_type'])
 
 
 df=bedDet[["TranscriptID","source"]]
