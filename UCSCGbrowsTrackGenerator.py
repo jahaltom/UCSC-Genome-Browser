@@ -60,16 +60,14 @@ bed.close()
 
 
 #Update metadata
-md_tx = pd.read_csv("Transcript_level_metadata.tsv",sep='\t') 
-
-md_tx=md_tx.drop(columns=['EB_type']) 
+md_tx = pd.read_csv("Transcript_level_metadata.tsv",sep='\t')  
+md_tx=md_tx.drop(columns=['EB_type'])    
 
 md_gene = pd.read_csv("Gene_level_metadata.tsv",sep='\t') 
+md_gene=md_gene.drop(columns=['EB_type'])  
+md_gene=md_gene.drop_duplicates()
 
-md_gene=md_gene.drop(columns=['EB_type']) 
-md_gene=md_gene.drop_duplicates() 
-
-df=bedDet[["TranscriptID","source"]] 
+df=bedDet[["TranscriptID","source"]]          
 df = df.rename(columns={'source': 'EB_type'}) 
 
 md_tx=pd.merge(md_tx,df,on=["TranscriptID"],how="left") 
@@ -81,9 +79,6 @@ df=df.drop_duplicates()
 md_gene=pd.merge(md_gene,df,on=["Gene_ID_ver"],how="left")
 
 md_gene.to_csv("Gene_level_metadata.tsv",sep='\t',index=False)
-
-
-
 
 
 
