@@ -15,6 +15,6 @@ After making the track file, make a UCSC accout to enable track sharing. Then up
 Use EB.html for "Optional track documentation:"
 
 
-Gbrows link: https://genome.ucsc.edu/s/jahaltom/EN%20genes
+Gbrows link: https://genome.ucsc.edu/s/jahaltom/Orphan%20Genes
 
 ![alt text](https://github.com/jahaltom/UCSC-Genome-Browser/blob/main/UCSCGenomeBrowserSession.png?raw=true)
